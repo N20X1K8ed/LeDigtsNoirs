@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🖤 Les Doigts Noirs</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;700;900&family=Noto+Serif+JP:wght@200;300;400&display=swap');
+
+  :root {
+    --czar:    #5A5A5A;
+    --maitre:  #6A8FAF;
+    --patriar: #A00028;
+    --sheikh:  #C9A227;
+    --sensei:  #D8D8D8;
+    --coeur:   #0A0A0A;
+    --bg:      #04040A;
+    --text:    #C8C4B8;
+    --gold:    #C9A227;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 999; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    width: 100%; height: 100svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute; inset: 0;
+    background: url('1.png') center/cover no-repeat;
+    filter: brightness(0.28) saturate(0.6);
+    transform: scale(1.04);
+    animation: slowzoom 30s linear infinite alternate;
+  }
+
+  @keyframes slowzoom {
+    from { transform: scale(1.04); }
+    to   { transform: scale(1.12); }
+  }
+
+  .hero-vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, transparent 20%, #04040A 80%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    animation: fadeup 2.4s cubic-bezier(.16,1,.3,1) both;
+  }
+
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-org {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: #fff;
+    text-shadow: 0 0 80px rgba(10,10,10,0.9);
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: #B0A898;
+    font-size: 0.55em;
+    display: block;
+    letter-spacing: 0.25em;
+    margin-top: 0.6rem;
+  }
+
+  .hero-subtitle {
+    margin-top: 2.5rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    letter-spacing: 0.35em;
+    color: var(--text);
+    opacity: 0.5;
+  }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0.4;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 0.25; } 50% { opacity: 0.55; }
+  }
+
+  .scroll-indicator span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+  }
+
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  /* ── SECTION SHARED ── */
+  section { position: relative; }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    opacity: 0.85;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── FACE2 SECTION ── */
+  .face2-section {
+    background: linear-gradient(to bottom, var(--bg), #080810, var(--bg));
+  }
+
+  .face2-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .face2-grid { grid-template-columns: 1fr; }
+  }
+
+  .face2-img-wrap {
+    position: relative;
+  }
+
+  .face2-img-wrap img {
+    width: 100%;
+    filter: brightness(0.85) contrast(1.1) saturate(0.8);
+    display: block;
+  }
+
+  .face2-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 60%, var(--bg) 100%);
+  }
+
+  .face2-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .face2-text p {
+    font-size: 1rem;
+    line-height: 2.1;
+    opacity: 0.82;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── MEMBERS SECTION ── */
+  .members-section { background: var(--bg); }
+
+  .members-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .members-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    color: #fff;
+  }
+
+  .members-header h2 span {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* ── MEMBER CARD ── */
+  .member-card {
+    display: grid;
+    grid-template-columns: 3px 1fr;
+    gap: 0 3rem;
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .member-card.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  .card-bar {
+    width: 3px;
+    align-self: stretch;
+    border-radius: 2px;
+  }
+
+  .card-body { display: flex; flex-direction: column; gap: 1.8rem; }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .card-name-block {}
+
+  .card-role {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    opacity: 0.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .card-alias {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    opacity: 0.65;
+    margin-top: 0.3rem;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+  }
+
+  .card-meta-item {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    opacity: 0.65;
+  }
+
+  .card-color-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card-field {
+    padding: 1.2rem 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 2px;
+  }
+
+  .field-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.35em;
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .field-val {
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  .card-desc {
+    font-size: 1rem;
+    line-height: 2.1;
+    opacity: 0.82;
+    border-left: 1px solid rgba(255,255,255,0.12);
+    padding-left: 1.5rem;
+  }
+
+  .card-theme {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+  }
+
+  .theme-icon {
+    font-size: 1.2rem;
+    opacity: 0.5;
+  }
+
+  .theme-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    opacity: 0.8;
+  }
+
+  /* ── COEUR SECTION ── */
+  .coeur-section {
+    background: #000;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .coeur-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, #12000A 0%, #000 60%);
+  }
+
+  .coeur-inner {
+    position: relative; z-index: 1;
+    padding: clamp(5rem, 12vw, 12rem) clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .coeur-pulse {
+    width: 120px; height: 120px;
+    margin: 0 auto 3rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a0008 0%, #0A0A0A 70%);
+    border: 1px solid rgba(160,0,40,0.15);
+    display: flex; align-items: center; justify-content: center;
+    animation: heartbeat 2.4s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(160,0,40,0.08), 0 0 100px rgba(160,0,40,0.04);
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); box-shadow: 0 0 40px rgba(160,0,40,0.08); }
+    14% { transform: scale(1.06); box-shadow: 0 0 60px rgba(160,0,40,0.18); }
+    28% { transform: scale(1.02); }
+    42% { transform: scale(1.07); box-shadow: 0 0 70px rgba(160,0,40,0.2); }
+  }
+
+  .coeur-pulse svg { opacity: 0.4; }
+
+  .coeur-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .coeur-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.45em;
+    color: var(--patriar);
+    opacity: 0.85;
+    margin-bottom: 2rem;
+  }
+
+  .coeur-desc {
+    max-width: 640px;
+    margin: 0 auto 3rem;
+    font-size: 1rem;
+    line-height: 2.1;
+    opacity: 0.75;
+  }
+
+  /* ── INTERLUDE IMAGE ── */
+  .interlude-section {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .interlude-img-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .interlude-img-wrap img {
+    width: 100%;
+    display: block;
+    filter: brightness(0.75) saturate(0.8);
+  }
+
+  .interlude-img-wrap::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, var(--bg), transparent);
+    z-index: 1;
+  }
+
+  .interlude-img-wrap::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to top, #000, transparent);
+    z-index: 1;
+  }
+
+  /* ── PENTAGON ── */
+  .pentagon-wrap {
+    margin: 4rem auto 0;
+    max-width: 520px;
+  }
+
+  .pentagon-svg { width: 100%; height: auto; }
+
+  /* ── ALBUM SECTION ── */
+  .album-section { background: #030308; }
+
+  .album-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .album-grid { grid-template-columns: 1fr; }
+  }
+
+  .album-cover {
+    position: sticky; top: 4rem;
+  }
+
+  .album-cover img {
+    width: 100%;
+    display: block;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+  }
+
+  .album-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .album-desc {
+    font-size: 1rem;
+    opacity: 0.7;
+    line-height: 1.9;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── TRACKLIST ── */
+  .phase-block { margin-bottom: 3rem; }
+
+  .phase-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    opacity: 0.85;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    gap: 0 1rem;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .track:hover { background: rgba(255,255,255,0.025); }
+
+  .track-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    opacity: 0.4;
+    text-align: right;
+  }
+
+  .track-info {}
+
+  .track-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: #eee;
+    font-weight: 400;
+  }
+
+  .track-artist {
+    font-size: 0.82rem;
+    opacity: 0.55;
+    margin-top: 0.15rem;
+  }
+
+  .track-note {
+    font-size: 0.78rem;
+    opacity: 0.5;
+    font-style: italic;
+    text-align: right;
+    max-width: 160px;
+  }
+
+  /* ── RELATIONS ── */
+  .relations-section { background: var(--bg); }
+
+  .rel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .rel-item {
+    background: var(--bg);
+    padding: 1.5rem 2rem;
+    transition: background 0.2s;
+  }
+
+  .rel-item:hover { background: rgba(255,255,255,0.015); }
+
+  .rel-pair {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 0.4rem;
+  }
+
+  .rel-desc {
+    font-size: 0.88rem;
+    opacity: 0.65;
+    letter-spacing: 0.08em;
+    font-family: 'Cinzel', serif;
+  }
+
+  /* ── FLOW SECTION ── */
+  .flow-section { background: #050508; }
+
+  .flow-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .flow-chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 2rem;
+  }
+
+  .flow-node {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    min-width: 130px;
+    position: relative;
+  }
+
+  .flow-node-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    margin-bottom: 0.3rem;
+  }
+
+  .flow-node-role {
+    font-size: 0.82rem;
+    opacity: 0.55;
+  }
+
+  .flow-arrow {
+    font-size: 1rem;
+    opacity: 0.2;
+    padding: 0 0.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    opacity: 0.2;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    opacity: 0.3;
+    margin: 2rem 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(4,4,10,0.9), transparent);
+    pointer-events: none;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #fff;
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-sigil {
+    font-size: 1.2rem;
+    opacity: 0.3;
+    color: var(--gold);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .member-card { grid-template-columns: 3px 1fr; gap: 0 1.5rem; }
+    .flow-chain { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Les Doigts Noirs</div>
+  <div class="nav-sigil">✦</div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <p class="hero-org">黒き五指と黒き心臓</p>
+    <h1 class="hero-title">
+      Les Doigts<br>Noirs
+      <em>制度的無意識の五角形</em>
+    </h1>
+    <p class="hero-subtitle">Czar · Maître · Patriarch · Sheikh · Sensei</p>
+  </div>
+  <div class="scroll-indicator">
+    <span>Descend</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── FACE 2 SECTION ── -->
+<section class="face2-section">
+  <div class="section-inner">
+    <div class="face2-grid">
+      <div class="face2-img-wrap">
+        <img src="2.png" alt="Les Doigts Noirs">
+      </div>
+      <div class="face2-text">
+        <p class="section-label">Organisation</p>
+        <h2>五指は一体として<br>世界を成立させる</h2>
+        <div class="divider"></div>
+        <p>五指の機能は裁定・観察・逸脱・儀式・記録。それぞれが独立した組織を持ち、表向きは合法的な研究・文化・技術の領域に潜伏する。</p>
+        <p>しかし裏では、世界の存在の可否そのものを決定する「制度的五角形」として連動する。中心に置かれた黒き心臓（Le Cœur Noir）が五指の処理結果を統合し、最終的な世界の決定を下す。</p>
+        <p>表向きに存在しない。しかし、すべては彼らを通過している。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MEMBERS ── -->
+<section class="members-section">
+  <div class="section-inner">
+    <div class="members-header">
+      <p class="section-label">Les Cinq Membres</p>
+      <h2>五指の <span>構成員</span></h2>
+    </div>
+
+    <!-- Czar -->
+    <div class="member-card" data-index="0">
+      <div class="card-bar" style="background: var(--czar);"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <div class="card-name-block">
+            <div class="card-role">Thumb · Grundsatzamt</div>
+            <div class="card-name">Czar</div>
+            <div class="card-alias">— Samuel Eisenberg</div>
+          </div>
+          <div class="card-meta">
+            <div class="card-meta-item"><span class="card-color-dot" style="background:var(--czar)"></span>Iron Grey #5A5A5A</div>
+            <div class="card-meta-item">190cm · 45歳 · バイソン</div>
+            <div class="card-meta-item">ドイツ</div>
+          </div>
+        </div>
+        <p class="card-desc">寡黙で重く、判断に揺らぎがない。怒りではなく沈黙で圧をかける。五指で最も"人間味が薄い"。存在／非存在の裁定、世界の基準の決定、歴史や人物の"成立／抹消"の最終審級。鉄灰の葉巻に火をつけることはない——存在そのものを象徴する。</p>
+        <div class="card-grid">
+          <div class="card-field">
+            <div class="field-label">表向き</div>
+            <div class="field-val">国際法・倫理監査<br>行政透明化研究</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">衣装</div>
+            <div class="field-val">超高密度メルトンウール × カシミア10%<br>完全マット、光を吸収</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">嗜好 / 酒</div>
+            <div class="field-val">アイスボック（Eisbock）<br>凍結濃縮、余計なものを削ぎ落とす</div>
+          </div>
+        </div>
+        <div class="card-theme">
+          <div class="theme-icon">♫</div>
+          <div class="theme-text">Lustmord – "Heretic" — 重低音と無慈悲な静寂＝裁定そのもの</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Maître -->
+    <div class="member-card" data-index="1">
+      <div class="card-bar" style="background: var(--maitre);"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <div class="card-name-block">
+            <div class="card-role">Index · L'Atelier de l'Intuition Sociale</div>
+            <div class="card-name">Maître</div>
+            <div class="card-alias">— Lucien Delacroix</div>
+          </div>
+          <div class="card-meta">
+            <div class="card-meta-item"><span class="card-color-dot" style="background:var(--maitre)"></span>Silver Blue #6A8FAF</div>
+            <div class="card-meta-item">182cm · 35歳 · ハヤブサ</div>
+            <div class="card-meta-item">フランス</div>
+          </div>
+        </div>
+        <p class="card-desc">ナルシストで美学に忠実。静かで観察的だが、自分の見せ方を精密にコントロールする。"見ているし、見られたい"。社会の盲点の抽出、観察誘導、問題が"発生する条件"の生成、視線の誘導と焦点化。</p>
+        <div class="card-grid">
+          <div class="card-field">
+            <div class="field-label">表向き</div>
+            <div class="field-val">社会分析、都市文化研究<br>SNSトレンド解析</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">衣装</div>
+            <div class="field-val">スーパーファイン・ウーステッド × 微光沢モヘア混<br>線の美しさを最大化</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">嗜好 / 酒</div>
+            <div class="field-val">白ワイン（シャブリ）<br>透明感・光の揺らぎ</div>
+          </div>
+        </div>
+        <div class="card-theme">
+          <div class="theme-icon">♫</div>
+          <div class="theme-text">Sébastien Tellier – "Roche" — 蒼銀の海に溶けるような官能性と自己愛</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patriarch -->
+    <div class="member-card" data-index="2">
+      <div class="card-bar" style="background: var(--patriar);"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <div class="card-name-block">
+            <div class="card-role">Middle · Thee Fractures</div>
+            <div class="card-name">Patriarch</div>
+            <div class="card-alias">— Vincent Harker</div>
+          </div>
+          <div class="card-meta">
+            <div class="card-meta-item"><span class="card-color-dot" style="background:var(--patriar)"></span>Crimson Red #A00028</div>
+            <div class="card-meta-item">200cm · 40歳 · ハイエナ</div>
+            <div class="card-meta-item">アメリカ</div>
+          </div>
+        </div>
+        <p class="card-desc">衝動的で破壊的。笑っているのに目が笑っていない。混乱を"美"として扱う。社会安定の破壊、逸脱の誘発、情報混乱の創出、破断そのものを崇拝する"儀式的破壊"。</p>
+        <div class="card-grid">
+          <div class="card-field">
+            <div class="field-label">表向き</div>
+            <div class="field-val">AIスタートアップ<br>破壊的イノベーション研究</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">衣装</div>
+            <div class="field-val">ハイエンド・テックレザー（植物タンニン鞣し × マット加工）<br>革の軋む微音が危険性を示す</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">嗜好 / 酒</div>
+            <div class="field-val">ハイプルーフ・バーボン<br>焦げた樽香と暴力性</div>
+          </div>
+        </div>
+        <div class="card-theme">
+          <div class="theme-icon">♫</div>
+          <div class="theme-text">SCARLXRD – "Heart Attack" — 既存の秩序を中指一本で否定する儀式的破断</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sheikh -->
+    <div class="member-card" data-index="3">
+      <div class="card-bar" style="background: var(--sheikh);"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <div class="card-name-block">
+            <div class="card-role">Ring · khadaam Ma'at (خَدَم مَاعت)</div>
+            <div class="card-name">Sheikh</div>
+            <div class="card-alias">— Elisabeth al‑Maari / إليزابيث المعري</div>
+          </div>
+          <div class="card-meta">
+            <div class="card-meta-item"><span class="card-color-dot" style="background:var(--sheikh)"></span>Desert Gold #C9A227</div>
+            <div class="card-meta-item">178cm · 28歳 · 蛇</div>
+            <div class="card-meta-item">エジプト</div>
+          </div>
+        </div>
+        <p class="card-desc">静謐で儀式的。言葉が常に"契約"として扱われる。怒りはないが拒絶は絶対。逸脱の儀式的固定、契約・封印・不可逆化の執行、世界の裏側の秩序の維持。砂金色の香炉の煙が儀式空間を生成する。</p>
+        <div class="card-grid">
+          <div class="card-field">
+            <div class="field-label">表向き</div>
+            <div class="field-val">古代文明研究財団<br>文化遺産保護団体</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">衣装</div>
+            <div class="field-val">砂金糸入りジャカード × 高級バンブー繊維<br>神殿的・不可逆な質感</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">嗜好 / 酒</div>
+            <div class="field-val">アラック（Arak）<br>儀式・祝祭・不可逆の余韻</div>
+          </div>
+        </div>
+        <div class="card-theme">
+          <div class="theme-icon">♫</div>
+          <div class="theme-text">Dead Can Dance – "The Host of Seraphim" — 神殿的・時間停止・封印の音</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sensei -->
+    <div class="member-card" data-index="4">
+      <div class="card-bar" style="background: var(--sensei);"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <div class="card-name-block">
+            <div class="card-role">Little · 誠隆会</div>
+            <div class="card-name">Sensei</div>
+            <div class="card-alias">— 山元 満誠 / Mitsumasa Yamamoto</div>
+          </div>
+          <div class="card-meta">
+            <div class="card-meta-item"><span class="card-color-dot" style="background:var(--sensei)"></span>Silver White #D8D8D8</div>
+            <div class="card-meta-item">170cm · 60歳 · フクロウ</div>
+            <div class="card-meta-item">日本</div>
+          </div>
+        </div>
+        <p class="card-desc">静かで柔らかいが、絶対に嘘を許さない。"筋"を通すためなら自分を削る。怒りは沈黙で示す。白銀の細縁眼鏡。眼鏡を直す仕草は警告である。正当性の担保、逸脱の履歴管理、記録の保存／抹消、裏社会の"筋"の管理。</p>
+        <div class="card-grid">
+          <div class="card-field">
+            <div class="field-label">表向き</div>
+            <div class="field-val">地域アーカイブセンター<br>古文書保存・行政資料デジタル化</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">衣装</div>
+            <div class="field-val">手織り和布（麻 × 和紙繊維） × 白銀糸刺し子<br>和紙の静謐、麻の芯＝"筋"</div>
+          </div>
+          <div class="card-field">
+            <div class="field-label">嗜好 / 酒</div>
+            <div class="field-val">辛口の冷酒（本醸造）<br>雑味なく、筋の通った静謐</div>
+          </div>
+        </div>
+        <div class="card-theme">
+          <div class="theme-icon">♫</div>
+          <div class="theme-text">DJ KRUSH – "Still Island" — 静謐、水のような時間感覚、記録が沈殿する音</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── INTERLUDE IMAGE ── -->
+<section class="interlude-section">
+  <div class="interlude-img-wrap">
+    <img src="4.png" alt="">
+  </div>
+</section>
+
+<!-- ── LE CŒUR NOIR ── -->
+<section class="coeur-section">
+  <div class="coeur-bg"></div>
+  <div class="coeur-inner">
+    <div class="coeur-pulse">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <path d="M20 34s-14-8.5-14-18a8 8 0 0 1 14-5.3A8 8 0 0 1 34 16c0 9.5-14 18-14 18z" stroke="#A00028" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <p class="coeur-sub">Le Cœur Noir · 黒き心臓</p>
+    <h2 class="coeur-title">制度的無意識</h2>
+    <p class="coeur-desc">
+      五指の処理結果を統合し、世界の"存在の最終決定"を行う制度的無意識。<br>
+      表向きには存在しない。しかし、すべての裁定・観察・逸脱・儀式・記録は、この黒き心臓を通過する。<br><br>
+      <em style="color:rgba(201,162,39,0.5); font-family:'Cormorant Garamond', serif;">
+        Johann Jóhannsson – "The Beast" — 逃れようのない世界の結論へと変わる、制度的な地鳴り。
+      </em>
+    </p>
+    <div class="pentagon-wrap">
+      <svg class="pentagon-svg" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Pentagon lines -->
+        <polygon points="200,30 370,160 305,330 95,330 30,160" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <!-- Inner pentagon -->
+        <polygon points="200,80 315,168 273,283 127,283 85,168" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4 6"/>
+        <!-- Connecting lines to center -->
+        <line x1="200" y1="30" x2="200" y2="183" stroke="rgba(90,90,90,0.3)" stroke-width="1"/>
+        <line x1="370" y1="160" x2="200" y2="183" stroke="rgba(106,143,175,0.3)" stroke-width="1"/>
+        <line x1="305" y1="330" x2="200" y2="183" stroke="rgba(160,0,40,0.3)" stroke-width="1"/>
+        <line x1="95" y1="330" x2="200" y2="183" stroke="rgba(201,162,39,0.3)" stroke-width="1"/>
+        <line x1="30" y1="160" x2="200" y2="183" stroke="rgba(216,216,216,0.3)" stroke-width="1"/>
+        <!-- Center -->
+        <circle cx="200" cy="183" r="18" fill="#0A0A0A" stroke="rgba(160,0,40,0.25)" stroke-width="1"/>
+        <circle cx="200" cy="183" r="4" fill="rgba(160,0,40,0.5)"/>
+        <!-- Node dots -->
+        <circle cx="200" cy="30" r="6" fill="#5A5A5A"/>
+        <circle cx="370" cy="160" r="6" fill="#6A8FAF"/>
+        <circle cx="305" cy="330" r="6" fill="#A00028"/>
+        <circle cx="95" cy="330" r="6" fill="#C9A227"/>
+        <circle cx="30" cy="160" r="6" fill="#D8D8D8"/>
+        <!-- Labels -->
+        <text x="200" y="18" fill="#5A5A5A" font-family="Cinzel" font-size="9" text-anchor="middle" letter-spacing="2">CZAR</text>
+        <text x="388" y="156" fill="#6A8FAF" font-family="Cinzel" font-size="9" text-anchor="start" letter-spacing="2">MAÎTRE</text>
+        <text x="310" y="348" fill="#A00028" font-family="Cinzel" font-size="9" text-anchor="middle" letter-spacing="2">PATRIARCH</text>
+        <text x="90" y="348" fill="#C9A227" font-family="Cinzel" font-size="9" text-anchor="middle" letter-spacing="2">SHEIKH</text>
+        <text x="4" y="156" fill="#D8D8D8" font-family="Cinzel" font-size="9" text-anchor="start" letter-spacing="2">SENSEI</text>
+        <text x="200" y="190" fill="rgba(160,0,40,0.6)" font-family="Cinzel" font-size="7" text-anchor="middle" letter-spacing="1">CŒUR</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── FLOW ── -->
+<section class="flow-section">
+  <div class="section-inner">
+    <p class="section-label" style="text-align:center">生成フロー</p>
+    <h2 class="flow-title">世界を成立させる五角形</h2>
+    <div class="flow-chain">
+      <div class="flow-node" style="border-color:rgba(90,90,90,0.3)">
+        <div class="flow-node-name" style="color:var(--czar)">Czar</div>
+        <div class="flow-node-role">裁定</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(106,143,175,0.3)">
+        <div class="flow-node-name" style="color:var(--maitre)">Maître</div>
+        <div class="flow-node-role">観察</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(160,0,40,0.3)">
+        <div class="flow-node-name" style="color:var(--patriar)">Patriarch</div>
+        <div class="flow-node-role">逸脱</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(201,162,39,0.3)">
+        <div class="flow-node-name" style="color:var(--sheikh)">Sheikh</div>
+        <div class="flow-node-role">儀式</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(216,216,216,0.2)">
+        <div class="flow-node-name" style="color:var(--sensei)">Sensei</div>
+        <div class="flow-node-role">記録</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RELATIONS ── -->
+<section class="relations-section">
+  <div class="section-inner">
+    <p class="section-label">Relations</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:#fff;margin-bottom:2.5rem;">
+      力学と<em style="font-style:italic;color:var(--gold)">関係性</em>
+    </h2>
+    <div class="rel-grid">
+      <div class="rel-item">
+        <div class="rel-pair">Czar × Sensei</div>
+        <div class="rel-desc">沈黙の信頼</div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-pair">Czar × Maître</div>
+        <div class="rel-desc">観察不能</div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-pair">Czar × Patriarch</div>
+        <div class="rel-desc">基準と破壊</div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-pair">Maître × Patriarch</div>
+        <div class="rel-desc">危険な相互依存</div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-pair">Maître × Sheikh</div>
+        <div class="rel-desc">美と儀式</div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-pair">Patriarch × Sheikh</div>
+        <div class="rel-desc">封印関係</div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-pair">Patriarch × Sensei</div>
+        <div class="rel-desc">記録の恐怖</div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-pair">Sheikh × Sensei</div>
+        <div class="rel-desc">形式と正当</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ALBUM ── -->
+<section class="album-section">
+  <div class="section-inner">
+    <p class="section-label">Soundtrack</p>
+    <div class="album-grid">
+      <div class="album-cover">
+        <img src="3.png" alt="The Cœur Beneath Institutions">
+      </div>
+      <div>
+        <h2 class="album-title">The Cœur Beneath<br>Institutions</h2>
+        <p class="album-desc">五指の動きと黒き心臓を音で再現した21曲。組織の出現から完全な忘却まで——制度的処刑のシネマティック・サウンドトラック。</p>
+
+        <div class="phase-block">
+          <div class="phase-title">Opening · The Shadow</div>
+          <div class="track"><div class="track-num">01</div><div class="track-info"><div class="track-title">Bridge of Death</div><div class="track-artist">Hildur Guðnadóttir</div></div><div class="track-note">組織の出現</div></div>
+          <div class="track"><div class="track-num">02</div><div class="track-info"><div class="track-title">The Righteous Wrath of an Honorable Man</div><div class="track-artist">Colin Stetson</div></div><div class="track-note">五指の連動</div></div>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title" style="color:var(--czar)">Phase 1 · Czar — 存在の裁定</div>
+          <div class="track"><div class="track-num">03</div><div class="track-info"><div class="track-title">Heretic</div><div class="track-artist">Lustmord</div></div><div class="track-note">絶対的な重圧</div></div>
+          <div class="track"><div class="track-num">04</div><div class="track-info"><div class="track-title">Shadow 1</div><div class="track-artist">Max Richter</div></div><div class="track-note">歴史の審級</div></div>
+          <div class="track"><div class="track-num">05</div><div class="track-info"><div class="track-title">Trucks in Place</div><div class="track-artist">Ludwig Göransson</div></div><div class="track-note">物理的な排除</div></div>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title" style="color:var(--maitre)">Phase 2 · Maître — 盲点の抽出</div>
+          <div class="track"><div class="track-num">06</div><div class="track-info"><div class="track-title">Roche</div><div class="track-artist">Sébastien Tellier</div></div><div class="track-note">甘美な視線</div></div>
+          <div class="track"><div class="track-num">07</div><div class="track-info"><div class="track-title">Iron (Instrumental)</div><div class="track-artist">Woodkid</div></div><div class="track-note">空間の支配</div></div>
+          <div class="track"><div class="track-num">08</div><div class="track-info"><div class="track-title">Resurrection</div><div class="track-artist">John Debney</div></div><div class="track-note">神格化された審判</div></div>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title" style="color:var(--patriar)">Phase 3 · Patriarch — 逸脱の生成</div>
+          <div class="track"><div class="track-num">09</div><div class="track-info"><div class="track-title">Come To Daddy</div><div class="track-artist">Aphex Twin</div></div><div class="track-note">歪んだ笑い</div></div>
+          <div class="track"><div class="track-num">10</div><div class="track-info"><div class="track-title">Heart Attack</div><div class="track-artist">SCARLXRD</div></div><div class="track-note">Midfingers up</div></div>
+          <div class="track"><div class="track-num">11</div><div class="track-info"><div class="track-title">Viol</div><div class="track-artist">Gesaffelstein</div></div><div class="track-note">無機質な暴力</div></div>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title" style="color:var(--sheikh)">Phase 4 · Sheikh — 儀式的固定</div>
+          <div class="track"><div class="track-num">12</div><div class="track-info"><div class="track-title">Fakir</div><div class="track-artist">Muslimgauze</div></div><div class="track-note">不可逆の契約</div></div>
+          <div class="track"><div class="track-num">13</div><div class="track-info"><div class="track-title">The Host of Seraphim</div><div class="track-artist">Dead Can Dance</div></div><div class="track-note">儀式の音</div></div>
+          <div class="track"><div class="track-num">14</div><div class="track-info"><div class="track-title">Elegy</div><div class="track-artist">Lisa Gerrard</div></div><div class="track-note">絶対的な拒絶</div></div>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title" style="color:var(--sensei)">Phase 5 · Sensei — 正当性の記録</div>
+          <div class="track"><div class="track-num">15</div><div class="track-info"><div class="track-title">Still Island</div><div class="track-artist">DJ KRUSH</div></div><div class="track-note">記録者の静謐</div></div>
+          <div class="track"><div class="track-num">16</div><div class="track-info"><div class="track-title">骨董</div><div class="track-artist">冥丁</div></div><div class="track-note">筋の再構築</div></div>
+          <div class="track"><div class="track-num">17</div><div class="track-info"><div class="track-title">On the Nature of Daylight</div><div class="track-artist">Max Richter</div></div><div class="track-note">最高潮の絶望</div></div>
+          <div class="track"><div class="track-num">18</div><div class="track-info"><div class="track-title">Solari</div><div class="track-artist">坂本龍一</div></div><div class="track-note">最後の記録の点</div></div>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title" style="color:var(--patriar)">Climax · Le Cœur Noir</div>
+          <div class="track"><div class="track-num">19</div><div class="track-info"><div class="track-title">The Beast</div><div class="track-artist">Jóhann Jóhannsson</div></div><div class="track-note">黒き心臓が打つ</div></div>
+          <div class="track"><div class="track-num">20</div><div class="track-info"><div class="track-title">Xerrox Monophaser 2</div><div class="track-artist">Alva Noto</div></div><div class="track-note">完全な忘却</div></div>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title">Epilogue · The Fading Record</div>
+          <div class="track"><div class="track-num">21</div><div class="track-info"><div class="track-title">Virginal I</div><div class="track-artist">Tim Hecker</div></div><div class="track-note">記録さえも崩壊</div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  🖤 Les Doigts Noirs · Le Cœur Noir · 制度的五角形 · 世界を成立させる無意識
+</footer>
+
+<script>
+  // Scroll reveal
+  const cards = document.querySelectorAll('.member-card');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), parseInt(e.target.dataset.index || 0) * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(c => obs.observe(c));
+</script>
+</body>
+</html>
